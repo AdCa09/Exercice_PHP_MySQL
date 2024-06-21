@@ -1,3 +1,29 @@
+<?php
+include 'authentification_user/verif_session.php';
+
+
+session_start();
+
+if (isset($_SESSION["username"]) && isset($_SESSION["password"])) {
+
+  echo '<html>';
+  echo '<head>';
+  echo '<title>read.php</title>';
+  echo '</head>';
+
+  echo '<body>';
+  echo 'Votre username est ' . $_SESSION['username'] . ' et votre mot de passe est ' . $_SESSION['password'] . '.';
+
+  echo '<a href=/Exercice_PHP_MySQL/Exercice_ile/authentification_user/logout.php>Déconnexion</a>';
+
+
+
+} else {
+  echo 'Variables non déclarées.';
+}
+;
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -10,7 +36,7 @@
 <body>
   <h1>Liste des randonnées</h1>
   <table>
-    
+
     <tbody>
       <?php
       include 'connexionDB.php';
@@ -32,6 +58,7 @@
         echo '<td>' . $row['distance'] . '</td>';
         echo '<td>' . $row['duration'] . '</td>';
         echo '<td>' . $row['height_difference'] . '</td>';
+        echo '<td>' . $row['avaible'] . '</td>';
         echo '<td><a href="update.php?id=' . $row['id'] . '">Modifier</a></td>';
         echo '<td><form action="delete.php" method="post"><input type="hidden" name="id" value="' . $row['id'] . '"><button type="submit" name="delete_button">Supprimer</button></form></td>';
         echo '</tr>';
